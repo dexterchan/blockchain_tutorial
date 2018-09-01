@@ -2,10 +2,58 @@ const assert = require('assert');
 const ganache = require('ganache-cli'); //access Eth test network
 const Web3 = require('web3'); //Web3 "class"
 
-const web3 = new Web3(ganache.provider()); //instance of Web3 connecting to ganache, replace it with main,test eth in future
+const provider = ganache.provider();
+const web3 = new Web3(provider); //instance of Web3 connecting to ganache, replace it with main,test eth in future
+const {interface, bytecode} = require('../compile');
 
 
+let accounts;
+let inbox;
+beforeEach(
+    async()=>{
+        //New promise async
+        //Get a list of all accounts
+        accounts = await web3.eth.getAccounts();
 
+        //Use one of these contract to deploy a contract
+        inbox=await new web3.eth.Contract(JSON.parse(interface))
+            .deploy({data:bytecode, arguments:["Hi, pigpig!"] }) //tell web3 to prepare a copy of contract for deployment
+            .send({from: accounts[0],  gas:1000000});
+        inbox.setProvider ( provider); //set provider aligning to web3
+    }
+    /*
+    ()=>{
+    //Old callback async code
+    //Get a list of all accounts
+    accounts=web3.eth.getAccounts() //async operation
+        .then (
+            fetchedAccount=>{
+                console.log(fetchedAccount);
+            }
+        );
+    //Use one of these contract to deploy a contract
+    }
+    */
+);
+
+
+describe("Inbox",()=>{
+    it("deploys contract",()=>{
+        console.log(inbox);
+        assert.ok(inbox.options.address);
+    });
+
+    it("get address",()=>{
+        console.log("Contract address:"+inbox.options.address);
+    });
+
+    it("has a default message",async ()=>{
+        const message = await inbox.methods.getMessage().call();
+        assert.equal(message,"Hi, pigpig!");
+    });
+});
+
+/*
 class Car{
     park(){
         return "stopped";
@@ -34,3 +82,4 @@ describe("Car to test",() => {
         assert.equal(car.drive(), "vroom");
     });
 });
+*/
