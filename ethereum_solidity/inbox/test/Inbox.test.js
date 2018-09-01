@@ -52,6 +52,14 @@ describe("Inbox",()=>{
         const message = await inbox.methods.getMessage().call();
         assert.equal(message,HelloMessage);
     });
+
+    it("changes message with a transaction", async()=>{
+        const modMessage = "How are you?";
+        await inbox.methods.setMessage(modMessage).send({from: accounts[0],gas:1000000});
+
+        const message = await inbox.methods.getMessage().call();
+        assert.equal(message,modMessage);
+    });
 });
 
 /*
