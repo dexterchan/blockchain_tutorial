@@ -9,6 +9,7 @@ const {interface, bytecode} = require('../compile');
 
 let accounts;
 let inbox;
+const HelloMessage="Hi, pigpig!";
 beforeEach(
     async()=>{
         //New promise async
@@ -17,7 +18,7 @@ beforeEach(
 
         //Use one of these contract to deploy a contract
         inbox=await new web3.eth.Contract(JSON.parse(interface))
-            .deploy({data:bytecode, arguments:["Hi, pigpig!"] }) //tell web3 to prepare a copy of contract for deployment
+            .deploy({data:bytecode, arguments:[HelloMessage] }) //tell web3 to prepare a copy of contract for deployment
             .send({from: accounts[0],  gas:1000000});
         inbox.setProvider ( provider); //set provider aligning to web3
     }
@@ -49,7 +50,7 @@ describe("Inbox",()=>{
 
     it("has a default message",async ()=>{
         const message = await inbox.methods.getMessage().call();
-        assert.equal(message,"Hi, pigpig!");
+        assert.equal(message,HelloMessage);
     });
 });
 
