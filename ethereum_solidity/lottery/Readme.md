@@ -11,3 +11,6 @@ Manager chose a winner<br>
 
 # Lottery Contract function overview <br>
 ![Lottery function](pic/LotteryContractFunctions.png)<br>
+
+# Pseudo Random Generator <br>
+![Pseudo Random](pic/PseudoRandomGenerator.png)<br>
