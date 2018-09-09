@@ -21,14 +21,21 @@ contract Lottery{
         return bigNum;
     }
     
-    function pickWinner() public returns (address){
+    function pickWinner() public restrictedOnlyManager returns (address){
         require(players.length>0,"Number of player must be >0");
-        require(msg.sender == manager,"You must be manager to run this function");
+        //require(msg.sender == manager,"You must be manager to run this function");
         uint winnerIndex = random()%players.length;
         
         address winner = players[winnerIndex];
         winner.transfer(this.balance);
         players = new address[] (0);//new dynamic array with initial size of zero
         return winner;
+    }
+    modifier restrictedOnlyManager() {
+        require(msg.sender == manager,"You must be manager to run this function");
+        _;
+    }
+    function getPlayers() public view returns (address[]){
+        return players;
     }
 }
