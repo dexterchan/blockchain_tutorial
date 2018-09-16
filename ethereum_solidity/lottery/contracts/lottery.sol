@@ -21,6 +21,7 @@ contract Lottery{
         return bigNum;
     }
     
+    // "restrictedOnlyManager" is the modifier to insert default code
     function pickWinner() public restrictedOnlyManager returns (address){
         require(players.length>0,"Number of player must be >0");
         //require(msg.sender == manager,"You must be manager to run this function");
@@ -28,12 +29,13 @@ contract Lottery{
         
         address winner = players[winnerIndex];
         winner.transfer(this.balance);
-        players = new address[] (0);//new dynamic array with initial size of zero
+        //empty the players for next run by using new dynamic array with initial size of zero
+        players = new address[] (0);
         return winner;
     }
     modifier restrictedOnlyManager() {
         require(msg.sender == manager,"You must be manager to run this function");
-        _;
+        _;//run for the rest of the code
     }
     function getPlayers() public view returns (address[]){
         return players;
