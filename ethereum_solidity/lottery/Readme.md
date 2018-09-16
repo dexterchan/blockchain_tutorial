@@ -1,5 +1,14 @@
 # Lottery use case
 A use case of Lottery on Ethereum blockchan
+
+# Compile Solidity Contract
+Run:
+node compile.js
+
+#Run the test case
+Run:
+npm run test
+
 # Lottery Contract - place bet
 Initially, player sends eth to the pool<br>
 ![LotteryOverview](pic/LotteryContractOverview.png)<br>
@@ -14,3 +23,6 @@ Manager chose a winner<br>
 
 # Pseudo Random Generator <br>
 ![Pseudo Random](pic/PseudoRandomGenerator.png)<br>
+
+# Ethereum Web App Architecture
+![EthWebAppArchi](pic/EthereumWebAppArchitecture.png)
