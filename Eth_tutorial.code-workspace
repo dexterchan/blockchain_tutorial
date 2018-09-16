@@ -3,5 +3,8 @@
 		{
 			"path": "ethereum_solidity"
 		}
-	]
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
 }
