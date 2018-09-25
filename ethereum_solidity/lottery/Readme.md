@@ -7,7 +7,8 @@ node compile.js
 
 #Run the test case
 Run:
-npm run test
+npm run test <br>
+test script is connecting to local node emulated by ganache
 
 # Lottery Contract - place bet
 Initially, player sends eth to the pool<br>
@@ -26,3 +27,14 @@ Manager chose a winner<br>
 
 # Ethereum Web App Architecture
 ![EthWebAppArchi](pic/EthereumWebAppArchitecture.png)
+
+# Ethereum Dapp with metamask
+Every page of your browser is injected with web3 V0.2 provider with metamask. <br>
+That web3 instance with Metamask was ready to connect to Rinkeby network.<br>
+Our Dapp is using web3V1.0. <br>
+However, metamask web3 stores all private keys inside the provider.<br>
+Therefore, Dapp web3 tap on metamask web3.<br>
+![EthDappMetamask](pic/DappwithMetamask.png)
+
+# Ethereum Front-end events - render the contract info lifecycle
+![EthRender](pic/RenderContractOnReactJS.png)

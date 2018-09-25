@@ -13,11 +13,11 @@ const deploy = async ()=>{
     const accounts = await web3.eth.getAccounts();
 
     console.log("Attempting to deploy from account",accounts[0]);
-    inbox=await new web3.eth.Contract(JSON.parse(interface))
+    const result=await new web3.eth.Contract(JSON.parse(interface))
         .deploy({data:"0x"+bytecode})
         .send( {/*gas:5000000,*/ from: accounts[0]}); //a bug on Throffle wallet with gas parameter
-        
-    console.log("Contract deployed to ", inbox.options.address);
+    console.log(interface);
+    console.log("Contract deployed to ", result.options.address);
 };
 
 deploy();
