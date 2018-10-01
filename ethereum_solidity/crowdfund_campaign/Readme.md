@@ -15,6 +15,15 @@ For each request of money spent, it requires voting support from approvers.
 For each spending request, No multiple vote by a single person
 ![Single vote](pic/VotingRule1_NoMulitpleVoteSinglePerson.png)
 
+## Voting Rule 2 - Resilient for large number of approvers
+Expect thousands of approvers in voting <br>
+System resilient for thousands of approvers
+![resilient](pic/VotingRule2_ResilientMultipleContributor.png)
+
+## Approval of request
+
+![approvalrequest](pic/RequestApproval.png)
+
 ## Today Crowd Funding such as KickStarter
 ### Ideal case
 ![KickStarterIdealWorld](pic/KickStarterIdealWorld.png)
