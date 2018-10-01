@@ -1,6 +1,19 @@
 pragma solidity ^0.4.17;
 
-contract crowdfundcampaign{
+contract CrowdFundCampaignFactory{
+    address[] public deployedCampaigns;
+    function createCrowdFundCampaign(uint minimumFund) public returns(address){
+        address  newcampaign=new CrowdFundCampaign(minimumFund,msg.sender);
+        deployedCampaigns.push(newcampaign);
+        return newcampaign;
+    }
+    
+    function getDeployedCampaigns() public view returns (address[]){
+        return deployedCampaigns;
+    }
+}
+
+contract CrowdFundCampaign{
     struct Request{
         string description;
         uint value;
@@ -10,17 +23,18 @@ contract crowdfundcampaign{
         mapping(address=>bool)approvals;
         uint approvalCount;
     }
+    
     address public manager;
     uint public minimumContribution; //amt is in wei
     mapping (address=>bool) public approvers;
     address[] public approverAddressLst ;//since mapping not have iteration, we need to have approver array list
+        
     Request[] public requests;
     
     //our constructor
-    constructor (uint minimumfund) public{
-        manager=msg.sender;
+    constructor (uint minimumfund, address creator) public{
+        manager=creator;
         minimumContribution=minimumfund;
-        
     }
     
     function contribute() public payable{
