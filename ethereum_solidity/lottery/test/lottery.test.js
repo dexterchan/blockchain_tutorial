@@ -16,7 +16,7 @@ beforeEach(
         //Get a list of all accounts
         accounts = await web3.eth.getAccounts();
 
-        //Use one of these contract to deploy a contract
+        //Use one of these account to deploy a contract
         lottery=await new web3.eth.Contract(JSON.parse(interface))
             .deploy({data:"0x"+bytecode }) //tell web3 to prepare a copy of contract for deployment
             .send({from: accounts[0] ,  gas:1000000});

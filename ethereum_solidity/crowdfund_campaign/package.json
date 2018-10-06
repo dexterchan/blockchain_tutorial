@@ -1,0 +1,18 @@
+{
+  "name": "crowdfund_campaign",
+  "version": "1.0.0",
+  "description": "## Workflow Manager setups a contract for fund raising. Contributors put $$$ into the contract as contributor. Each contributor becomes approver of each spending to vendor. For each request of money spent, it requires voting support from approvers. ![Eth_ProjectFund](pic/Eth_ProjectFund.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^7.0.0",
+    "ganache-cli": "^6.1.8",
+    "mocha": "^5.2.0",
+    "solc": "^0.4.25",
+    "web3": "^1.0.0-beta.35"
+  }
+}
