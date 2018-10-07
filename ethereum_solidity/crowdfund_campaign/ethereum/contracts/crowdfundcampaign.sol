@@ -87,4 +87,8 @@ contract CrowdFundCampaign{
         request.complete=true;
         
     }
+
+    function getApprovers() public view returns (address[]){
+        return approverAddressLst;
+    }
 }

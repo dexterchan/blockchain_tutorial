@@ -23,7 +23,7 @@ beforeEach(
 
         factory=await new web3.eth.Contract(JSON.parse(compiledFactory.interface))
         .deploy({data:"0x"+compiledFactory.bytecode }) //tell web3 to prepare a copy of contract for deployment
-        .send({from: accounts[0] ,  gas:1000000});
+        .send({from: accounts[0] ,  gas:2000000});
 
         campaignMgrAddress = accounts[1];
         retObj=await factory.methods.createCrowdFundCampaign(web3.utils.toWei("0.02",'ether')).send(
@@ -62,16 +62,17 @@ describe("Campaign contract",()=>{
         const isContributed = await campaign.methods.approvers(userAcct).call();
         assert.equal(true,isContributed);
 
-/*
-        const approverAddressLst=await campaign.methods.getApprovers().call(
-            {//Since it is arrat, must provide gas
-                from:userAcct,  gas:1000000
-            }
-        );
+        found=false;
+        const approverAddressLst=await campaign.methods.getApprovers().call();
         approverAddressLst.forEach((approver)=>{
-            Console.log(approver);
+            
+            if(approver==userAcct){
+                found=true;
+            }
+            
         }
-        );*/
+        );
+        assert(found);
     });
 
     it("disallow contribution less than minimum contribution", async()=>{
