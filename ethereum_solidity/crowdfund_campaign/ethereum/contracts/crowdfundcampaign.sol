@@ -28,19 +28,22 @@ contract CrowdFundCampaign{
     uint public minimumContribution; //amt is in wei
     mapping (address=>bool) public approvers;
     address[] public approverAddressLst ;//since mapping not have iteration, we need to have approver array list
-        
+    uint approverCount;
     Request[] public requests;
     
     //our constructor
     constructor (uint minimumfund, address creator) public{
         manager=creator;
         minimumContribution=minimumfund;
+        approverCount=0;
     }
     
     function contribute() public payable{
         require(msg.value> minimumContribution);
-        approverAddressLst.push(msg.sender);
+        
         approvers[msg.sender]=true;
+        approverAddressLst.push(msg.sender);
+        approverCount++;
     }
     modifier restrictedmgr(){
         require(msg.sender==manager,"Only manager can create request");
@@ -77,7 +80,7 @@ contract CrowdFundCampaign{
         require(index<requests.length,"Not able to find this contract");
         Request storage request= requests[index];
         
-        require(request.approvalCount>(approverAddressLst.length/2));
+        require(request.approvalCount>(approverCount/2));
         require(!request.complete,"Request has been completed.");
         
         request.recipient.transfer(request.value);
