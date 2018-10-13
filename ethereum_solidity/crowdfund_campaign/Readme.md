@@ -65,3 +65,20 @@ Lack of transparency to stakeholder of monitoring delivery.<br>
 No control if spending outside of project.<br>
 ![KickStarterNonIdeal](pic/KickStarterNonIdeal.png)
 
+## GUI design
+#### Main page of the campaign <br>
+![MainPage](pic/GUI.MainPage.png)<br>
+Steps of list out campaigns<br>
+![listcampaign](pic/GUI.MainPage.Todo.png)
+
+### Next.js server access ethereum network
+Caution: <br>
+Following code not working <br>
+//still use metamask <br>
+//However, below code of <br>
+//const web3 = new Web3(window.web3.currentProvider); <br>
+//will NOT work in "Next server" <br>
+//Reason: Next server can not prepare javascript to initialize "window" component as client browser <br>
+const web3 = new Web3(window.web3.currentProvider); <br>
+
+![serverAccessEth](pic/GUI.ServerAccessEth.png)<br>
