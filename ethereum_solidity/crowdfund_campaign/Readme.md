@@ -66,10 +66,17 @@ No control if spending outside of project.<br>
 ![KickStarterNonIdeal](pic/KickStarterNonIdeal.png)
 
 ## GUI design
+### Routing scheme
+![route](pic/GUI.RoutingPages.png) <br>
+to support request management use case on a dynamic contract address, <br> we applies next-route framework to implement dynamic routing as below <br>
+![workflowRoute](pic/GUI.DynamicRouting.png)
 #### Main page of the campaign <br>
 ![MainPage](pic/GUI.MainPage.png)<br>
 Steps of list out campaigns<br>
 ![listcampaign](pic/GUI.MainPage.Todo.png)
+
+### Campaign creation page <br>
+![createpage](pic/GUI.createCampaign.png) <br>
 
 ### Next.js server access ethereum network
 Caution: <br>
@@ -82,3 +89,4 @@ Following code not working <br>
 const web3 = new Web3(window.web3.currentProvider); <br>
 
 ![serverAccessEth](pic/GUI.ServerAccessEth.png)<br>
+

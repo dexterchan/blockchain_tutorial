@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import { Menu } from 'semantic-ui-react';
+import { Menu,Icon } from 'semantic-ui-react';
 
 export default()=>{
     return (
@@ -14,7 +14,7 @@ export default()=>{
                     Campaigns
                 </Menu.Item>
                 <Menu.Item>
-                    +
+                <Icon disabled name='add circle' />
                 </Menu.Item>
             </Menu.Menu>
         </Menu>
