@@ -2,9 +2,9 @@ import React,{Component} from "react";
 import factory from "../ethereum/factory";
 //import 'semantic-ui-css/semantic.css';
 import { Card,Button } from 'semantic-ui-react';
-
+import {Link} from "../routes";
 import Layout from "../components/Layout";
-
+//Link object is a React component to render anchor tags in React component
 
 class CampaignIndex extends Component{
 
@@ -28,8 +28,11 @@ class CampaignIndex extends Component{
         const items=this.props.campaigns.map(address=>{
             return{
                 header:address,
-                description:<a>View Campaign</a>,
-                fluid: true
+                description:
+                <Link route={`/campaigns/${address}`}>
+                    <a>View Campaign</a>
+                </Link>
+                ,fluid: true
             };
         });
         return <Card.Group items={items} />;
@@ -42,8 +45,11 @@ class CampaignIndex extends Component{
                 <div>
                     
                     <h3>Open campaigns</h3>
-                    
+                    <Link route="campaigns/new">
+                    <a>
                     <Button floated="right" icon="add circle" content="Create Campaign" primary/>
+                    </a>
+                    </Link>
                     {this.renderCampaigns()}
                 </div>
             </Layout>

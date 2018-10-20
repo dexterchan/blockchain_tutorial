@@ -4,6 +4,10 @@ import { Button, Form ,Dropdown,Input,Label,Message} from 'semantic-ui-react'
 
 import Layout from "../../components/Layout";
 import web3 from '../../ethereum/web3';
+import {Link,Router} from "../../routes";
+//Link object is a React component to render anchor tags in React component
+//Router object route page from page
+
 const options = [
     { key: 'ether', text: 'ether', value: 'ether' },
     { key: 'wei', text: 'wei', value: 'wei' }
@@ -41,7 +45,10 @@ class CampaignNew extends Component {
                     from: campaignMgrAddress,  gas:1000000
                 }
             );
-            Console.log(retObj)
+            Router.pushRoute("/");//if successful, route user to other page
+            
+            console.log(retObj);
+
         }catch(err){
             this.setState({statusMessage:err.message});
         }finally {
