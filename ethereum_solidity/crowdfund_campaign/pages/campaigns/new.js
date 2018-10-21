@@ -8,10 +8,7 @@ import {Link,Router} from "../../routes";
 //Link object is a React component to render anchor tags in React component
 //Router object route page from page
 
-const options = [
-    { key: 'ether', text: 'ether', value: 'ether' },
-    { key: 'wei', text: 'wei', value: 'wei' }
-  ]
+
 
 class CampaignNew extends Component {
     state={
@@ -24,7 +21,7 @@ class CampaignNew extends Component {
         const r = event.target.value;
         if (Number.isNaN(Number.parseFloat(r))) {
             this.setState({minimumContribution:""});
-            this.setState({statusMessage:"Min contribution should be numberic"})
+            this.setState({statusMessage:"Min contribution should be numberic"});
             return;
         }
         this.setState({minimumContribution:r})
@@ -66,7 +63,10 @@ class CampaignNew extends Component {
                     <Form.Field>
                     <label>Minimum contribution</label>
                     <Input  
-                    label={<Dropdown defaultValue='ether' options={options} />}
+                    label={<Dropdown defaultValue='ether' options={[
+                        { key: 'ether', text: 'ether', value: 'ether' },
+                        { key: 'wei', text: 'wei', value: 'wei' }
+                      ]} />}
                     labelPosition='right'
                     placeholder='minimum contribution' 
                     value={this.state.minimumContribution}

@@ -42,10 +42,15 @@ beforeEach(
 );
 
 describe("Campaign contract",()=>{
-    it("deploys a factory and campaign",()=>{
+    it("deploys a factory and campaign",async()=>{
         //console.log(factory);
         assert.ok(factory.options.address);
         assert.ok(campaign.options.address);
+        
+        summaryvalues=await campaign.methods.getSummary().call();
+
+        assert.equal(web3.utils.toWei("0.02",'ether'),summaryvalues[0]);
+
     });
 
     it("marks caller as the campaign manager", async()=>{
@@ -56,8 +61,9 @@ describe("Campaign contract",()=>{
 
     it("allows users to contribute money and marks them as approver",async() =>{
         userAcct = accounts[2];
+        let contributeAmt="0.2";
         await campaign.methods.contribute().send(
-            {from: userAcct ,  value:web3.utils.toWei("0.2",'ether'),gas:5000000}
+            {from: userAcct ,  value:web3.utils.toWei(contributeAmt,'ether'),gas:5000000}
         );
         const isContributed = await campaign.methods.approvers(userAcct).call();
         assert.equal(true,isContributed);
@@ -73,6 +79,10 @@ describe("Campaign contract",()=>{
         }
         );
         assert(found);
+
+        summaryvalues=await campaign.methods.getSummary().call();
+        assert.equal(web3.utils.toWei(contributeAmt,'ether'),summaryvalues[1]);
+        assert.equal(1,summaryvalues[3]);
     });
 
     it("disallow contribution less than minimum contribution", async()=>{
@@ -98,6 +108,10 @@ describe("Campaign contract",()=>{
 
         const request = await campaign.methods.requests(0).call();
         assert("buy battery",request.description);
+
+        summaryvalues=await campaign.methods.getSummary().call();
+
+        assert.equal(1,summaryvalues[2]);
     });
 
 

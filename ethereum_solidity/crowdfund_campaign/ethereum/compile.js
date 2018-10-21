@@ -8,6 +8,7 @@ fs.removeSync(buildPath);
 
 //Read source code 
 const ContractPath = path.resolve(__dirname,'contracts','crowdfundcampaign.sol');
+console.log(ContractPath);
 const source = fs.readFileSync(ContractPath,'utf8');
 
 //Compile the solidity contract by solidity compiler

@@ -9,13 +9,15 @@ import Layout from "../components/Layout";
 class CampaignIndex extends Component{
 
     static async getInitialProps(){
+        //running in server
         const campaigns=await factory.methods.getDeployedCampaigns().call();
         return {campaigns};
     }
 
     /*
-    Load on the browser run, no longer needed when Next server run in getInitialProps at server side
+    componentDidMount loads on the browser run, no longer needed when Next server run in getInitialProps at server side
     async componentDidMount(){
+        //running in browser
         const campaigns=await factory.methods.getDeployedCampaigns().call();
         console.log(campaigns);
     }*/
@@ -29,7 +31,7 @@ class CampaignIndex extends Component{
             return{
                 header:address,
                 description:
-                <Link route={`/campaigns/${address}`}>
+                <Link route={`campaigns/${address}`}>
                     <a>View Campaign</a>
                 </Link>
                 ,fluid: true

@@ -91,4 +91,20 @@ contract CrowdFundCampaign{
     function getApprovers() public view returns (address[]){
         return approverAddressLst;
     }
+
+    function getSummary() public view returns (
+        uint,uint,uint,uint,address
+    ){
+        return(
+            minimumContribution,
+            this.balance,
+            requests.length,
+            approverCount,
+            manager
+        );
+    }
+
+    function getRequestsCount() public view returns (uint){
+        return requests.length;
+    }
 }
