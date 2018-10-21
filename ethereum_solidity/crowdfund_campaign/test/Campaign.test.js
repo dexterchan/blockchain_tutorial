@@ -65,8 +65,26 @@ describe("Campaign contract",()=>{
         await campaign.methods.contribute().send(
             {from: userAcct ,  value:web3.utils.toWei(contributeAmt,'ether'),gas:5000000}
         );
+        numApprovers = await campaign.methods.approverCount().call();
+        assert.equal(1,numApprovers);
+
+        //same user contribute again
+        await campaign.methods.contribute().send(
+            {from: userAcct ,  value:web3.utils.toWei(contributeAmt,'ether'),gas:5000000}
+        );
+        numApprovers = await campaign.methods.approverCount().call();
+        assert.equal(1,numApprovers);
+
         const isContributed = await campaign.methods.approvers(userAcct).call();
         assert.equal(true,isContributed);
+
+        //diff user contribute again
+        userAcct = accounts[5];
+        await campaign.methods.contribute().send(
+            {from: userAcct ,  value:web3.utils.toWei(contributeAmt,'ether'),gas:5000000}
+        );
+        numApprovers = await campaign.methods.approverCount().call();
+        assert.equal(2,numApprovers);
 
         found=false;
         const approverAddressLst=await campaign.methods.getApprovers().call();
@@ -81,8 +99,8 @@ describe("Campaign contract",()=>{
         assert(found);
 
         summaryvalues=await campaign.methods.getSummary().call();
-        assert.equal(web3.utils.toWei(contributeAmt,'ether'),summaryvalues[1]);
-        assert.equal(1,summaryvalues[3]);
+        assert.equal(web3.utils.toWei(contributeAmt,'ether')*3,summaryvalues[1]);
+        assert.equal(2,summaryvalues[3]);
     });
 
     it("disallow contribution less than minimum contribution", async()=>{

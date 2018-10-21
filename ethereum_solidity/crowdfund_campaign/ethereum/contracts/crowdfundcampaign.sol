@@ -28,7 +28,7 @@ contract CrowdFundCampaign{
     uint public minimumContribution; //amt is in wei
     mapping (address=>bool) public approvers;
     address[] public approverAddressLst ;//since mapping not have iteration, we need to have approver array list
-    uint approverCount;
+    uint public approverCount;
     Request[] public requests;
     
     //our constructor
@@ -41,9 +41,11 @@ contract CrowdFundCampaign{
     function contribute() public payable{
         require(msg.value> minimumContribution);
         
+        if(!approvers[msg.sender] ){
+            approverAddressLst.push(msg.sender);
+            approverCount++;
+        }
         approvers[msg.sender]=true;
-        approverAddressLst.push(msg.sender);
-        approverCount++;
     }
     modifier restrictedmgr(){
         require(msg.sender==manager,"Only manager can create request");

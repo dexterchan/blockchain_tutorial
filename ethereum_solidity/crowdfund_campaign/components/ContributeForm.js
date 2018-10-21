@@ -44,6 +44,7 @@ class ContributeForm extends Component{
             this.setState({statusMessage:err.message});
         }finally{
             this.setState({loading:false});
+            this.setState({contribution:""});
         }
     };
 
