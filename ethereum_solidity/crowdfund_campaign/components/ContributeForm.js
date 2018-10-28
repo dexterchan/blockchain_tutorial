@@ -15,12 +15,19 @@ class ContributeForm extends Component{
     };
     checkContribution = (event)=>{
         const r = event.target.value;
-        if (Number.isNaN(Number.parseFloat(r))) {
+        let parseValue=Number.parseFloat(r);
+        
+        if (Number.isNaN(parseValue)) {
             this.setState({contribution:""});
             this.setState({statusMessage:"contribution should be numberic"});
             return;
         }
-        this.setState({contribution:r});
+        if(r.endsWith(".") || r.endsWith("0")) {
+            parseValue=r;
+        }else{
+            parseValue=parseValue.toString();
+        }
+        this.setState({contribution:parseValue});
         this.setState({statusMessage:""})
     };
 
@@ -29,7 +36,7 @@ class ContributeForm extends Component{
         const campaignContract = campaignfunc(this.props.address);
         
         try{
-            this.setState({loading:true});
+            this.setState({loading:true,statusMessage:""});
             const accounts = await web3.eth.getAccounts();
             console.log(accounts);
             const contributorAddress = accounts[0];//A hack
@@ -38,13 +45,13 @@ class ContributeForm extends Component{
                 {from: contributorAddress , 
                 value:web3.utils.toWei(this.state.contribution,'ether')}
             );
-
+            
+            //refresh component after contribution
             Router.replaceRoute(`/campaigns/${this.props.address}`);
         }catch(err){
             this.setState({statusMessage:err.message});
         }finally{
-            this.setState({loading:false});
-            this.setState({contribution:""});
+            this.setState({loading:false,contribution:""});
         }
     };
 

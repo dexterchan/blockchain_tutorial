@@ -19,12 +19,19 @@ class CampaignNew extends Component {
 
     checkMinimumContribution = (event)=>{
         const r = event.target.value;
-        if (Number.isNaN(Number.parseFloat(r))) {
+        let parseValue=Number.parseFloat(r);
+        
+        if (Number.isNaN(parseValue)) {
             this.setState({minimumContribution:""});
             this.setState({statusMessage:"Min contribution should be numberic"});
             return;
         }
-        this.setState({minimumContribution:r})
+        if(r.endsWith(".") || r.endsWith("0")) {
+            parseValue=r;
+        }else{
+            parseValue=parseValue.toString();
+        }
+        this.setState({minimumContribution:parseValue})
         this.setState({statusMessage:""})
     };
 

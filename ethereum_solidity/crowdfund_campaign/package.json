@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "dev":"node server.js"
+    "dev": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "big-integer": "^1.6.36",
     "fs-extra": "^7.0.0",
     "ganache-cli": "^6.1.8",
     "mocha": "^5.2.0",

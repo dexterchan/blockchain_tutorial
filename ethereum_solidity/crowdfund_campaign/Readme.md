@@ -81,6 +81,9 @@ Steps of list out campaigns<br>
 ### Campaign details page <br>
 ![campaigndetail](pic/GUI.CampaignDetails.png) <br>
 
+### Campaign Request page <br>
+![campaignRequest](pic/GUI.ListRequest.png)<br>
+![campaignCreateRequest](pic/GUI.CreateNewRequest.png)
 ### Next.js server access ethereum network
 Caution: <br>
 Following code not working <br>
