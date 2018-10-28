@@ -4,8 +4,10 @@
   "description": "## Workflow Manager setups a contract for fund raising. Contributors put $$$ into the contract as contributor. Each contributor becomes approver of each spending to vendor. For each request of money spent, it requires voting support from approvers. ![Eth_ProjectFund](pic/Eth_ProjectFund.png)",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "dev": "node server.js"
+    "test": "mocha esm",
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",

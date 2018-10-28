@@ -74,7 +74,7 @@ class NewRequest extends Component{
             .send(
                 {from: mgrAddress}
             );
-            Router.pushRoute(`/campaigns/${this.props.address/requests}`);
+            Router.pushRoute(`/campaigns/${this.props.address}/requests`);
 
         }catch(err){
             this.setState({statusMessage:err.message});

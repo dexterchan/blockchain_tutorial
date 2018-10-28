@@ -1,6 +1,6 @@
 
 const next = require('next');
-const port = 3000;
+var port = process.env.PORT;
 const app = next({
     dev: process.env.NODE_ENV !== 'production'
     //ask our app to look for global env variable "NODE_ENV"
@@ -9,6 +9,9 @@ const app = next({
 const routes = require('./routes');
 const handler = routes.getRequestHandler(app);
 
+if( port == undefined){
+    port=3000;
+}
 
 // Without express
 const {createServer}=require("http");
