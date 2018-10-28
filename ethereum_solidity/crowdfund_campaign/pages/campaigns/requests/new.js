@@ -4,7 +4,7 @@ import {Button,Form,Message,Input,Label} from "semantic-ui-react";
 
 import web3 from "../../../ethereum/web3"
 import campaignfunc from "../../../ethereum/campaign";
-
+import readCampaignSummary from "../../../ethereum/readCampaignSummary";
 import {Link,Router} from "../../../routes";
 var bigInt = require("big-integer");
 
@@ -54,7 +54,8 @@ class NewRequest extends Component{
         try{
             this.setState({loading:true,statusMessage:""});
             const campaignSummary=await campaignContract.methods.getSummary().call();
-            const balance=campaignSummary[1];
+            const formattedSummary = readCampaignSummary(campaignSummary);
+            const balance=formattedSummary.balance;
             const {description,value,recipient} = this.state;
             const AskForValue=web3.utils.toWei(value,'ether');
 

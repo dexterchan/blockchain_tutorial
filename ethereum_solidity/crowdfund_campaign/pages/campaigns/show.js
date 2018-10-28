@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import Layout from '../../components/Layout';
 import campaignfunc from "../../ethereum/campaign";
-import CampaignSummary from "../../ethereum/campaignSummary";
+import readCampaignSummary from "../../ethereum/readCampaignSummary";
 import {Card,Grid, Button}  from 'semantic-ui-react'; 
 import web3 from '../../ethereum/web3';
 import {Link} from '../../routes';
@@ -18,6 +18,17 @@ class CampaignShow extends Component{
         const campaignContract = campaignfunc(props.query.address);
         const campaignSummary=await campaignContract.methods.getSummary().call();
         //console.log(campaignSummary);
+        const formattedSummary = readCampaignSummary(campaignSummary);
+        
+        return {
+            address:props.query.address,
+            minimumContribution:formattedSummary.minimumContribution,
+            balance:formattedSummary.balance,
+            requestsCount:formattedSummary.requestsCount,
+            approversCount:formattedSummary.approversCount,
+            manager:formattedSummary.manager
+        };
+        /*
         return {
             address:props.query.address,
             minimumContribution:campaignSummary[0],
@@ -25,19 +36,8 @@ class CampaignShow extends Component{
             requestsCount:campaignSummary[2],
             approversCount:campaignSummary[3],
             manager:campaignSummary[4]
-        };
-        /*
-        const c = new CampaignSummary();
-        const campaignSummary = c.getSummary (props.query.address);
-        console.log(campaignSummary);
-        return {
-            address:props.query.address,
-            minimumContribution:campaignSummary.minimumContribution,
-            balance:campaignSummary.balance,
-            requestsCount:campaignSummary.requestsCount,
-            approversCount:campaignSummary.approversCount,
-            manager:campaignSummary.manager
         };*/
+        
     }
 
     renderCards(){
